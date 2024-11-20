@@ -44,11 +44,18 @@ function initGame(e) {
     typingInput.value = "";
 
     setTimeout(() => {
+        let msg=document.querySelector(".msgbox");
         if(correctLetters.length === word.length) {
-            alert(`Congrats! You found the word ${word.toUpperCase()}`);
+            msg.style.display="block";
+            msg.innerHTML=`<p class="msg">congrats!you guessed it right</p>`;
+            let p=document.querySelector(".msg");
+p.style.color="green";
             return randomWord();
         } else if(maxGuesses < 1) {
-            alert("Game over! You don't have remaining guesses");
+            msg.style.display="block";
+            msg.innerHTML=`<p class="msg">you are out of guesses</p>`;
+            let p=document.querySelector(".msg");
+            p.style.color="red";
             for(let i = 0; i < word.length; i++) {
                 inputs.querySelectorAll("input")[i].value = word[i];
             }

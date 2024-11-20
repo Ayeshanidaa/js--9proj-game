@@ -28,12 +28,16 @@ body{
   z-index: -1;
   opacity: 0.9; /* Adjusted for better readability */
 }
-.wrapper{
+.wrapper {
+  position: relative;
   width: 430px;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;}
 .wrapper h1{
   font-size: 25px;
   font-weight: 500;

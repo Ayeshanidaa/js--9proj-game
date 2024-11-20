@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .profile-page{
+            display: flex;
+        }
+        .sidebar{
+            background-color: #F9F9F9;
+            width: 15%;
+            height: 100vh;
+            position: fixed;
+            padding: 20px 5px;
+            display:flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .main-content{
+            margin-left: 15%;
+            width: 100%;
+        }
+        h2{
+            padding: 20px;  
+        }
+        .story-container{
+             margin: 0;
+             padding: 20px 0 0 20px;
+            
+        }
+        /* #stories-container {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .story-card {
+          
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            width: 30%;
+            padding: 15px;
+        } */
+     
+    </style>
+</head>
+<body>
+    <div class="profile-page">
+        <aside class="sidebar">
+            <div class="profile-img-container">
+                <img id="profile-img" src="assets/profile.png" alt="Profile Image" class="rounded-profile">
+            
+        
+            </div>
+            <h3 id="username">Username</h3>
+            <!-- <h4 id="pen-name">Pen Name</h4> -->
+            <button onclick="logoutUser()">Logout</button>
+        </aside>
+
+      
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+    apiKey: "AIzaSyBQEJc9Z2BJ3wc3KWYPMjUUuYirpAsr2MU",
+    authDomain: "funspot-game.firebaseapp.com",
+    projectId: "funspot-game",
+    storageBucket: "funspot-game.firebasestorage.app",
+    messagingSenderId: "941617410081",
+    appId: "1:941617410081:web:3ac5f684bdf9c910f7b360"
+  };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const storage = firebase.storage();
+
+        document.addEventListener("DOMContentLoaded", () => {
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    loadUserProfile(user.uid);
+                    // loadUserStories(user.uid);
+                } else {
+                    window.location.href = "user.html";
+                }
+            });
+        });
+        function loadUserProfile(uid) {
+        const userRef = db.collection("users").doc(uid);
+        userRef.get().then(doc => {
+            if (doc.exists) {
+                const userData = doc.data();
+                document.getElementById("username").textContent = userData.username;
+               
+              
+            }
+        });
+    }
+    function logoutUser() {
+        auth.signOut().then(() => {
+            window.location.href = "index.html";
+        }).catch(error => {
+            console.error("Error logging out:", error);
+            alert("Error logging out. Please try again.");
+        });
+    }
+    
+    </script>
+</body>
+</html>

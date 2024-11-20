@@ -133,7 +133,7 @@
             background-color: rgba(51, 51, 51, 1);
         }
 
-        .modeSwitch {
+        #userIcon {
             position: absolute;
             top: 20px;
             right: 20px;
@@ -145,7 +145,7 @@
         }
 
         @media (max-width:768) {
-            .modeSwitch {
+            #userIcon {
                 font-size: 30px;
             }
 
@@ -172,13 +172,17 @@
         Your browser does not support the audio tag.
     </audio>
 
+
     <nav class="navbar">
         <img src="/funspot (2).png" alt="Logo" class="logo">
         <div class="right">
             <button id="soundBtn">🔊</button>
+            <button id="modeSwitch" class="modeSwitch">🌞</button>
+            <!-- User Icon -->
+            <img src="user-icon.png" alt="User Icon" id="userIcon" style="height: 40px; margin-left: 10px; cursor: pointer;">
         </div>
-        <button id="modeSwitch" class="modeSwitch">🌞</button>
     </nav>
+    
 
     <div class="control-buttons">
         <a href="select.html"><button id="playBtn">▶️ Play</button></a>
@@ -265,7 +269,7 @@
         window.onload = function() {
             setTimeout(function() {
                 loadingScreen.style.display = 'none'; // Hide the loading screen
-            }, 2000); // Adjust time as necessary
+            }, 1000); // Adjust time as necessary
         };
 
         const firebaseConfig = {
